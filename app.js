@@ -50,7 +50,7 @@ app.get('/', (req, res) => {
   const _database = encodeURIComponent(process.env.MYSQL_DATABASE);
   const _host = encodeURIComponent(process.env.INSTANCE_CONNECTION_NAME)
 
-  const uri = `mysql://${user}:${password}@${host}/${database}`;
+  //const uri = `mysql://${user}:${password}@${host}/${database}`;
   var connection = mysql.createConnection({
     host     : _host,
     user     : _user,
