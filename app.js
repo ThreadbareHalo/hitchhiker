@@ -99,8 +99,8 @@ app.get('/', (req, res) => {
   //callback(null, mysql.createConnection(uri));
 
   // Connect to the database
-  //const connection = mysql.createConnection(config);
-  const connection = mysql.createConnection(uri);
+  const connection = mysql.createConnection(config);
+  //const connection = mysql.createConnection(uri);
 
   console.log("NO?")
 
