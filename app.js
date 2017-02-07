@@ -76,7 +76,7 @@ function getPolicyFor(id) {
   return datastore.runQuery(query)
     .then((results) => {
       const entities = results[0];
-      return entities;
+      return entities.map((entity) => `Policy: ${entity.policy}`);
     });
 }
 // [END insertVisit]
@@ -109,7 +109,7 @@ app.get('/', (req, res, next) => {
   //insertPolitician("foo", "bar", "D");
   //insertPolicy(5639445604728832, "Likes puppies")
   
-  getPolicyFor()
+  getPolicyFor('5639445604728832')
     .then((policies) => {
       res
         .status(200)
