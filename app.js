@@ -67,6 +67,17 @@ function insertPolicy(id, policy) {
     data: p
   })
 }
+
+function getPolicyFor(fn, ln) {
+  const query = datastore.createQuery('politician')
+    .limit(10);
+
+  return datastore.runQuery(query)
+    .then((results) => {
+      const entities = results[0];
+      return entities;
+    });
+}
 // [END insertVisit]
 
 // [START getVisits]
@@ -96,6 +107,15 @@ app.get('/', (req, res, next) => {
 
   //insertPolitician("foo", "bar", "D");
   insertPolicy(5639445604728832, "Likes puppies")
+  
+  getVisits()
+    .then((policies) => {
+      res
+        .status(200)
+        .set('Content-Type', 'text/plain')
+        .send(`5639445604728832's policies:\n${policies.join('\n')}`)
+        .end();
+    })
   /*
   insertVisit(visit)
     // Query the last 10 visits from Datastore.
