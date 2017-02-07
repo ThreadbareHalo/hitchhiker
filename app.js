@@ -32,6 +32,13 @@ class Politician {
   }
 }
 
+class Policy {
+  constructor(id, policy) {
+    this.politicianId = id;
+    this.policy = policy
+  }
+}
+
 // [START insertVisit]
 /**
  * Insert a visit record into the database.
@@ -49,6 +56,14 @@ function insertPolitician(fn, ln, p) {
   p = new Politician(fn, ln, p);
   return datastore.save({
     key: datastore.key('politician'),
+    data: p
+  })
+}
+
+function insertPolicy(id, policy) {
+  p = new Policy(id, policy)
+  return datastore.save({
+    key: datastore.key('policy'),
     data: p
   })
 }
@@ -73,14 +88,15 @@ function getVisits () {
 
 app.get('/', (req, res, next) => {
   // Create a visit record to be stored in the database
-  const visit = {
-    timestamp: new Date(),
+  //const visit = {
+  //  timestamp: new Date(),
     // Store a hash of the visitor's ip address
-    userIp: crypto.createHash('sha256').update(req.ip).digest('hex').substr(0, 7)
-  };
+  //  userIp: crypto.createHash('sha256').update(req.ip).digest('hex').substr(0, 7)
+  //};
 
-  insertPolitician("foo", "bar", "D");
-
+  //insertPolitician("foo", "bar", "D");
+  insertPolicy(5639445604728832, "Likes puppies")
+  /*
   insertVisit(visit)
     // Query the last 10 visits from Datastore.
     .then(() => getVisits())
@@ -92,6 +108,7 @@ app.get('/', (req, res, next) => {
         .end();
     })
     .catch(next);
+    */
 });
 
 if (module === require.main) {
