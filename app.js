@@ -14,8 +14,9 @@
 'use strict';
 
 const express = require('express');
+const crypto = require('crypto');
 //const google = require('googleapis')
-const mysql = require('mysql');
+//const mysql = require('mysql');
 const Datastore = require('@google-cloud/datastore');
 const app = express();
 app.enable('trust proxy');
