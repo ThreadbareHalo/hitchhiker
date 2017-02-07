@@ -75,6 +75,7 @@ function getPolicyFor(id) {
 
   return datastore.runQuery(query)
     .then((results) => {
+      console.log("Policies" + JSON.stringify(results))
       const entities = results[0];
       return entities.map((entity) => `Policy: ${entity.policy}`);
     });
