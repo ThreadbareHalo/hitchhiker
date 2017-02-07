@@ -96,6 +96,7 @@ app.get('/', (req, res) => {
   const database = encodeURIComponent(config.database);
 
   const uri = `mysql://${user}:${password}@127.0.0.1:3306/${database}`;
+  console.log("URI: " + uri);
   //callback(null, mysql.createConnection(uri));
 
   // Connect to the database
