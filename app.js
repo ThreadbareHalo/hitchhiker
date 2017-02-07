@@ -68,8 +68,9 @@ function insertPolicy(id, policy) {
   })
 }
 
-function getPolicyFor(fn, ln) {
-  const query = datastore.createQuery('politician')
+function getPolicyFor(id) {
+  const query = datastore.createQuery('policy')
+    .filter('politicianId', '=', id)
     .limit(10);
 
   return datastore.runQuery(query)
@@ -108,7 +109,7 @@ app.get('/', (req, res, next) => {
   //insertPolitician("foo", "bar", "D");
   insertPolicy(5639445604728832, "Likes puppies")
   
-  getVisits()
+  getPolicyFor()
     .then((policies) => {
       res
         .status(200)
