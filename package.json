@@ -35,7 +35,7 @@
     "mocha": "^3.0.2",
     "nodejs-repo-tools": "git+https://git@github.com/GoogleCloudPlatform/nodejs-repo-tools.git",
     "supertest": "^2.0.0",
-    "mysql": "^2.13.0"
+    "@google-cloud/datastore": "^0.46.1"
   },
   "engines": {
     "node": ">=4.3.2"

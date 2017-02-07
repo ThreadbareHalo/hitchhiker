@@ -16,8 +16,10 @@
 const express = require('express');
 //const google = require('googleapis')
 const mysql = require('mysql');
-
+const Datastore = require('@google-cloud/datastore');
 const app = express();
+app.enable('trust proxy');
+const datastore = Datastore();
 
 /*
 foobar: () => {
@@ -40,10 +42,61 @@ foobar: () => {
 }
 */
 
+// [START insertVisit]
+/**
+ * Insert a visit record into the database.
+ *
+ * @param {object} visit The visit record to insert.
+ */
+function insertVisit (visit) {
+  return datastore.save({
+    key: datastore.key('visit'),
+    data: visit
+  });
+}
+// [END insertVisit]
+
+// [START getVisits]
+/**
+ * Retrieve the latest 10 visit records from the database.
+ */
+function getVisits () {
+  const query = datastore.createQuery('visit')
+    .order('timestamp', { descending: true })
+    .limit(10);
+
+  return datastore.runQuery(query)
+    .then((results) => {
+      const entities = results[0];
+      return entities.map((entity) => `Time: ${entity.timestamp}, AddrHash: ${entity.userIp}`);
+    });
+}
+// [END getVisits]
+
+app.get('/', (req, res, next) => {
+  // Create a visit record to be stored in the database
+  const visit = {
+    timestamp: new Date(),
+    // Store a hash of the visitor's ip address
+    userIp: crypto.createHash('sha256').update(req.ip).digest('hex').substr(0, 7)
+  };
+
+  insertVisit(visit)
+    // Query the last 10 visits from Datastore.
+    .then(() => getVisits())
+    .then((visits) => {
+      res
+        .status(200)
+        .set('Content-Type', 'text/plain')
+        .send(`Last 10 visits:\n${visits.join('\n')}`)
+        .end();
+    })
+    .catch(next);
+});
 
 // [START hello_world]
 // Say hello!
-app.get('/', (req, res) => {
+//app.get('/', (req, res) => {
   //res.status(200).send('Kazowie!!');
   //const _user = encodeURIComponent(process.env.MYSQL_USER);
   //const _password = encodeURIComponent(process.env.MYSQL_PASSWORD);
@@ -81,6 +134,7 @@ app.get('/', (req, res) => {
   connection.end();
   */
 
+  /*
   var config = {
     user: process.env.MYSQL_USER,
     password: process.env.MYSQL_PASSWORD,
@@ -114,7 +168,8 @@ app.get('/', (req, res) => {
   });
 
   connection.end();
-});
+  */
+//});
 // [END hello_world]
 
 if (module === require.main) {
