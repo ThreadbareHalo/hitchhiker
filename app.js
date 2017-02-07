@@ -70,8 +70,7 @@ function insertPolicy(id, policy) {
 
 function getPolicyFor(id) {
   const query = datastore.createQuery('policy')
-    .filter('politicianId', '5639445604728832')
-    .limit(10);
+    .filter('politicianId', '5639445604728832');
 
   return datastore.runQuery(query)
     .then((results) => {
