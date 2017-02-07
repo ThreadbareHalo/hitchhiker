@@ -91,9 +91,9 @@ app.get('/', (req, res) => {
     config.socketPath = `/cloudsql/${process.env.INSTANCE_CONNECTION_NAME}`;
   }
 
-  const user = encodeURIComponent(config.user);
-  const password = encodeURIComponent(config.password);
-  const database = encodeURIComponent(config.database);
+  const user = encodeURIComponent("simpleAccount");
+  const password = encodeURIComponent("simple1PW");
+  const database = encodeURIComponent("politicians");
 
   const uri = `mysql://${user}:${password}@127.0.0.1:3306/${database}`;
   console.log("URI: " + uri);
