@@ -95,7 +95,7 @@ app.get('/', (req, res) => {
   const password = encodeURIComponent("simple1PW");
   const database = encodeURIComponent("politicians");
 
-  const uri = `mysql://${user}:${password}@127.0.0.1:3306/${database}`;
+  const uri = `mysql://${user}:${password}@localhost:3306/${database}`;
   console.log("URI: " + uri);
   //callback(null, mysql.createConnection(uri));
 
