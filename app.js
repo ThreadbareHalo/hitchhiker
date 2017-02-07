@@ -85,18 +85,19 @@ app.get('/', (req, res) => {
     user: process.env.MYSQL_USER,
     password: process.env.MYSQL_PASSWORD,
     database: process.env.MYSQL_DATABASE
+    unix_socket: "mysql:unix_socket=/cloudsql/coherent-glow-157510:us-central1:hitchhiker-db;dbname=politicians"
   };
 
   if (process.env.INSTANCE_CONNECTION_NAME) {
     config.socketPath = `/cloudsql/${process.env.INSTANCE_CONNECTION_NAME}`;
   }
 
-  const user = encodeURIComponent("root");
-  const password = encodeURIComponent("g2rt0nMM");
+  const user = encodeURIComponent("simpleAccount");
+  const password = encodeURIComponent("simple1PW");
   const database = encodeURIComponent("politicians");
 
-  const uri = `mysql://${user}:${password}@localhost:3306/${database}`;
-  console.log("URI: " + uri);
+  //const uri = `mysql://${user}:${password}@localhost:3306/${database}`;
+  //console.log("URI: " + uri);
   //callback(null, mysql.createConnection(uri));
 
   // Connect to the database
