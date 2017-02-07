@@ -53,11 +53,14 @@ app.get('/', (req, res) => {
 
   //const uri = `mysql://${user}:${password}@${host}/${database}`;
   var connection = mysql.createConnection({
-    //host     : _dsn,
+    host     : "127.0.0.1",
     user     : _user,
     password : _password,
     database : _database,
-    socketPath : _dsn
+    dialect: "mysql",
+    dialectOptions: {
+      socketPath : _dsn
+    }
   });
 
   console.log("WHEE")
