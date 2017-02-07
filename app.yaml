@@ -28,8 +28,7 @@ env_variables:
   INSTANCE_CONNECTION_NAME: coherent-glow-157510:us-central1:hitchhiker-db
   MYSQL_HOST: 35.184.30.82
   MYSQL_DSN: mysql:unix_socket=/cloudsql/coherent-glow-157510:us-central1:hitchhiker-db;dbname=politicians
-  GCLOUD_PROJECT: "coherent-glow-157510"
-
+  
 beta_settings:
   # The connection name of your instance, available by using
   # 'gcloud beta sql instances describe [INSTANCE_NAME]' or from

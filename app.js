@@ -15,33 +15,22 @@
 
 const express = require('express');
 const crypto = require('crypto');
-//const google = require('googleapis')
-//const mysql = require('mysql');
 const Datastore = require('@google-cloud/datastore');
 const app = express();
 app.enable('trust proxy');
 const datastore = Datastore();
 
-/*
-foobar: () => {
-  google.auth.getApplicationDefault(function(err, authClient) {
-    if (err) {
-      return cb(err);
-    }
+class Politician {
+  constructor(firstName, lastName, party) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.party = party;
+  }
 
-    if (authClient.createScopedRequired && authClient.createScopedRequired()) {
-          //authClient = authClient.createScoped(['https://www.googleapis.com/auth/devstorage.read_write']);
-          console.log("YubNub");
-    }
-
-    var storage = google.storage('v1');
-    storage.buckets.list({
-        auth: authClient,
-        project: projectId
-      },  );
-  });
+  stringify() {
+    return JSON.stringify(this);
+  }
 }
-*/
 
 // [START insertVisit]
 /**
@@ -54,6 +43,14 @@ function insertVisit (visit) {
     key: datastore.key('visit'),
     data: visit
   });
+}
+
+function insertPolitician(fn, ln, p) {
+  p = new Politician(fn, ln, p);
+  return datastore.save({
+    key: datastore.key('politician'),
+    data: p
+  })
 }
 // [END insertVisit]
 
@@ -82,6 +79,8 @@ app.get('/', (req, res, next) => {
     userIp: crypto.createHash('sha256').update(req.ip).digest('hex').substr(0, 7)
   };
 
+  insertPolitician("foo", "bar", "D");
+
   insertVisit(visit)
     // Query the last 10 visits from Datastore.
     .then(() => getVisits())
@@ -94,84 +93,6 @@ app.get('/', (req, res, next) => {
     })
     .catch(next);
 });
-
-// [START hello_world]
-// Say hello!
-//app.get('/', (req, res) => {
-  //res.status(200).send('Kazowie!!');
-  //const _user = encodeURIComponent(process.env.MYSQL_USER);
-  //const _password = encodeURIComponent(process.env.MYSQL_PASSWORD);
-  //const _database = encodeURIComponent(process.env.MYSQL_DATABASE);
-  //const _host = encodeURIComponent(process.env.INSTANCE_CONNECTION_NAME)
-  //const _dsn = encodeURIComponent(process.env.MYSQL_DSN)
-
-  //const uri = `mysql://${user}:${password}@${host}/${database}`;
-  /*
-  var connection = mysql.createConnection({
-    host     : "127.0.0.1",
-    user     : _user,
-    password : _password,
-    database : _database,
-    dialect: "mysql",
-    dialectOptions: {
-      socketPath : _dsn
-    }
-  });
-  
-
-  console.log("WHEE")
-  
-  connection.connect();
-
-  console.log("NO?")
-
-  connection.query('SELECT * from politicians', function (error, results, fields) {
-    if (error) res.status(200).send(error);
-    //console.log('The solution is: ', results[0].solution);
-    console.log("GOT HERE?" + results + " - " + fields)
-    res.status(200).send(JSON.stringify(results))
-  });
-
-  connection.end();
-  */
-
-  /*
-  var config = {
-    user: process.env.MYSQL_USER,
-    password: process.env.MYSQL_PASSWORD,
-    database: process.env.MYSQL_DATABASE,
-    socket_path: "mysql:unix_socket=/cloudsql/coherent-glow-157510:main"
-  };
-
-  if (process.env.INSTANCE_CONNECTION_NAME) {
-    config.socketPath = `/cloudsql/${process.env.INSTANCE_CONNECTION_NAME}`;
-  }
-
-  const user = encodeURIComponent("simpleAccount");
-  const password = encodeURIComponent("simple1PW");
-  const database = encodeURIComponent("politicians");
-
-  //const uri = `mysql://${user}:${password}@localhost:3306/${database}`;
-  //console.log("URI: " + uri);
-  //callback(null, mysql.createConnection(uri));
-
-  // Connect to the database
-  const connection = mysql.createConnection(config);
-  //const connection = mysql.createConnection(uri);
-
-  console.log("NO?")
-
-  connection.query('SELECT * from politicians', function (error, results, fields) {
-    if (error) res.status(200).send(error);
-    //console.log('The solution is: ', results[0].solution);
-    console.log("GOT HERE?" + results + " - " + fields)
-    //res.status(200).send(JSON.stringify(results))
-  });
-
-  connection.end();
-  */
-//});
-// [END hello_world]
 
 if (module === require.main) {
   // [START server]
