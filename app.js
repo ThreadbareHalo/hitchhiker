@@ -53,7 +53,7 @@ function insertVisit (visit) {
 }
 
 function insertPolitician(fn, ln, p) {
-  p = new Politician(fn, ln, p);
+  var p = new Politician(fn, ln, p);
   return datastore.save({
     key: datastore.key('politician'),
     data: p
@@ -61,7 +61,7 @@ function insertPolitician(fn, ln, p) {
 }
 
 function insertPolicy(id, policy) {
-  p = new Policy(id, policy)
+  var p = new Policy(id, policy)
   return datastore.save({
     key: datastore.key('policy'),
     data: p
