@@ -100,7 +100,7 @@ app.get('/', (req, res) => {
     if (error) res.status(200).send(error);
     //console.log('The solution is: ', results[0].solution);
     console.log("GOT HERE?" + results + " - " + fields)
-    res.status(200).send(JSON.stringify(results))
+    //res.status(200).send(JSON.stringify(results))
   });
 
   connection.end();
