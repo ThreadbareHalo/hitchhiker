@@ -45,13 +45,14 @@ foobar: () => {
 // Say hello!
 app.get('/', (req, res) => {
   //res.status(200).send('Kazowie!!');
-  const _user = encodeURIComponent(process.env.MYSQL_USER);
-  const _password = encodeURIComponent(process.env.MYSQL_PASSWORD);
-  const _database = encodeURIComponent(process.env.MYSQL_DATABASE);
-  const _host = encodeURIComponent(process.env.INSTANCE_CONNECTION_NAME)
-  const _dsn = encodeURIComponent(process.env.MYSQL_DSN)
+  //const _user = encodeURIComponent(process.env.MYSQL_USER);
+  //const _password = encodeURIComponent(process.env.MYSQL_PASSWORD);
+  //const _database = encodeURIComponent(process.env.MYSQL_DATABASE);
+  //const _host = encodeURIComponent(process.env.INSTANCE_CONNECTION_NAME)
+  //const _dsn = encodeURIComponent(process.env.MYSQL_DSN)
 
   //const uri = `mysql://${user}:${password}@${host}/${database}`;
+  /*
   var connection = mysql.createConnection({
     host     : "127.0.0.1",
     user     : _user,
@@ -62,10 +63,36 @@ app.get('/', (req, res) => {
       socketPath : _dsn
     }
   });
+  
 
   console.log("WHEE")
   
   connection.connect();
+
+  console.log("NO?")
+
+  connection.query('SELECT * from politicians', function (error, results, fields) {
+    if (error) res.status(200).send(error);
+    //console.log('The solution is: ', results[0].solution);
+    console.log("GOT HERE?" + results + " - " + fields)
+    res.status(200).send(JSON.stringify(results))
+  });
+
+  connection.end();
+  */
+
+  var config = {
+    user: process.env.MYSQL_USER,
+    password: process.env.MYSQL_PASSWORD,
+    database: process.env.MYSQL_DATABASE
+  };
+
+  if (process.env.INSTANCE_CONNECTION_NAME) {
+    config.socketPath = `/cloudsql/${process.env.INSTANCE_CONNECTION_NAME}`;
+  }
+
+  // Connect to the database
+  const connection = mysql.createConnection(config);
 
   console.log("NO?")
 
