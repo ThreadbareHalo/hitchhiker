@@ -84,8 +84,8 @@ app.get('/', (req, res) => {
   var config = {
     user: process.env.MYSQL_USER,
     password: process.env.MYSQL_PASSWORD,
-    database: process.env.MYSQL_DATABASE
-    unix_socket: "mysql:unix_socket=/cloudsql/coherent-glow-157510:us-central1:hitchhiker-db;dbname=politicians"
+    database: process.env.MYSQL_DATABASE,
+    socket_path: "mysql:unix_socket=/cloudsql/coherent-glow-157510:us-central1:hitchhiker-db"
   };
 
   if (process.env.INSTANCE_CONNECTION_NAME) {
