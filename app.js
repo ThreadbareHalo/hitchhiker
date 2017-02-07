@@ -59,8 +59,12 @@ app.get('/', (req, res) => {
     database : _database,
     socketPath : _dsn
   });
+
+  console.log("WHEE")
   
   connection.connect();
+
+  console.log("NO?")
 
   connection.query('SELECT * from politicians', function (error, results, fields) {
     if (error) res.status(200).send(error);
