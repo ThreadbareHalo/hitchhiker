@@ -69,6 +69,7 @@ app.get('/', (req, res) => {
   connection.query('SELECT * from politicians', function (error, results, fields) {
     if (error) res.status(200).send(error);
     //console.log('The solution is: ', results[0].solution);
+    console.log("GOT HERE?" + results + " - " + fields)
     res.status(200).send(results[0].firstName + ", " + results[0].lastName + " - " + results[0].party)
   });
 
