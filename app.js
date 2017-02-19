@@ -19,6 +19,8 @@ const Datastore = require('@google-cloud/datastore');
 const app = express();
 app.enable('trust proxy');
 const datastore = Datastore();
+var Client = require('node-wolfram')
+var Wolfram = new Client("T5PRQE-AT3553XA7J")
 
 class Politician {
   constructor(firstName, lastName, party) {
@@ -111,11 +113,16 @@ app.get('/', (req, res, next) => {
   
   getPolicyFor('5639445604728832')
     .then((policies) => {
-      res
-        .status(200)
-        .set('Content-Type', 'text/plain')
-        .send(`5639445604728832's policies:\n${policies.join('\n')}`)
-        .end();
+      Wolfram.query("5x + 2 where x = 7", function(err, result) {
+        if(err) throw err
+        res
+          .status(200)
+          .set('Content-Type', 'text/plain')
+          //.send(`5639445604728832's policies:\n${policies.join('\n')}`)
+          .send("Result: %j", result)
+          .end();
+          //console.log("Result: %j", result)
+      })
     })
   /*
   insertVisit(visit)
