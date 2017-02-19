@@ -114,7 +114,7 @@ app.get('/', (req, res, next) => {
   getPolicyFor('5639445604728832')
     .then((policies) => {
       Wolfram.query("5x + 2 where x = 7", function(err, result) {
-        console.log("Result: %j", result)
+        console.log("Result: %j", result.queryresult.pod[1].subpod[0].plaintext[0])
         if(err) throw err
         console.log("SUCCEESS")
         res

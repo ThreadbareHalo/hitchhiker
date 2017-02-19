@@ -1,0 +1,10 @@
+{"queryresult":{"$":{"success":"true","error":"false","numpods":"3","datatypes":"","timedout":"","timedoutpods":"","timing":"1.443","parsetiming":"0.907","parsetimedout":"fal
+se","recalculate":"","id":"MSPa16101idh519f15b072ag000050458867fbfc8377","host":"http://www5b.wolframalpha.com","server":"47","related":"http://www5b.wolframalpha.com/api/v2/relatedQ
+ueries.jsp?id=MSPa16111idh519f15b072ag000034a0b31gc881hdhd4817092641705821560","version":"2.6"},"pod":[{"$":{"title":"Input interpretation","scanner":"Identity","id":"Input","positio
+n":"100","error":"false","numsubpods":"1"},"subpod":[{"$":{"title":""},"img":[{"$":{"src":"http://www5b.wolframalpha.com/Calculate/MSP/MSP16121idh519f15b072ag00004cbihg903946c94e?MSP
+StoreType=image/gif&s=47","alt":"5 x + 2 where x = 7","title":"5 x + 2 where x = 7","width":"127","height":"18"}}],"plaintext":["5 x + 2 where x = 7"]}]},{"$":{"title":"Result","scan
+ner":"EvaluateAt","id":"Result","position":"200","error":"false","numsubpods":"1","primary":"true"},"subpod":[{"$":{"title":""},"img":[{"$":{"src":"http://www5b.wolframalpha.com/Calc
+ulate/MSP/MSP16131idh519f15b072ag000011hafb21dedgahf3?MSPStoreType=image/gif&s=47","alt":"37","title":"37","width":"16","height":"18"}}],"plaintext":["37"]}],"states":[{"$":{"count":
+"1"},"state":[{"$":{"name":"Step-by-step solution","input":"Result__Step-by-step solution"}}]}]},{"$":{"title":"Plot","scanner":"Plot","id":"Plot","position":"300","error":"false","n
+umsubpods":"1"},"subpod":[{"$":{"title":""},"img":[{"$":{"src":"http://www5b.wolframalpha.com/Calculate/MSP/MSP16141idh519f15b072ag000059chf3014f189bhe?MSPStoreType=image/gif&s=47","
+alt":"","title":"","width":"477","height":"235"}}],"plaintext":[""]}]}]}}
