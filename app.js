@@ -114,14 +114,14 @@ app.get('/', (req, res, next) => {
   getPolicyFor('5639445604728832')
     .then((policies) => {
       Wolfram.query("5x + 2 where x = 7", function(err, result) {
+        console.log("Result: %j", result)
         if(err) throw err
+        console.log("SUCCEESS")
         res
           .status(200)
           .set('Content-Type', 'text/plain')
-          //.send(`5639445604728832's policies:\n${policies.join('\n')}`)
-          .send("Result: %j", result)
+          .send(`5639445604728832's policies:\n${policies.join('\n')}`)
           .end();
-          //console.log("Result: %j", result)
       })
     })
   /*
